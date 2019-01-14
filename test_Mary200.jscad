@@ -1,6 +1,6 @@
 /*********************************************
  * DEPLIAGE v2                               *
- * - Modèle 3D :MARY 200 faces (format .OFF) *
+ * - ModÃ¨le 3D :MARY 200 faces (format .OFF) *
  *********************************************/
 const gep_bord = 0.05,
 gln = '#' + '-'.repeat(25),
@@ -19,15 +19,15 @@ function flatNonRec(input) {
     // On sort une valeur de la pile
     const next = stack.pop();
     if (Array.isArray(next)) {
-      // On place les éléments qui sont des tableaux dans
-      // la pile sans modifier l'entrée
+      // On place les Ã©lÃ©ments qui sont des tableaux dans
+      // la pile sans modifier l'entrÃ©e
       stack.push(...next);
     } else {
       res.push(next);
     }
   }
-  // On inverse le résultat pour revenir 
-  // à l 'ordre de l'entrée
+  // On inverse le rÃ©sultat pour revenir 
+  // Ã  l 'ordre de l'entrÃ©e
   return res.reverse();
 }
 
@@ -40,10 +40,10 @@ function flatNonRec(input) {
 
 function getParameterDefinitions() {
   return [
-    { name: 'triangle', type: 'text', initial:'0', caption: 'Départ(s):' },
+    { name: 'triangle', type: 'text', initial:'0', caption: 'DÃ©part(s):' },
     { name: 'echelle', type: 'number', initial:'3', caption: 'Echelle:' },
     { name: 'echTexte', type: 'number', initial:'0.15', caption: 'Taille txt:' },
-    { name: 'mode', type: 'text', initial:'prod', caption:'Mode:'}
+    { name: 'mode', type: 'text', initial:'dev', caption:'Mode:'}
   ];
 }
 function main(params){
@@ -51,12 +51,12 @@ function main(params){
   // A: { csg, lPts, cag, V}
   /* T : { cag, v0p, v1p, v2p }
     	valeurs possible pour vXp :
-	- 0		= non présent
-	- 1		= séparé avec n° affiché	AFFICHER n°
+	- 0		= non prÃ©sent
+	- 1		= sÃ©parÃ© avec nÂ° affichÃ©	AFFICHER nÂ°
 	----------------------------------------------
-	- 10	= attaché                 NE PAS AFFICHER n°
-	- 11	= attaché coplanaire
-	- 12	= séparé sans n° affiché
+	- 10	= attachÃ©                 NE PAS AFFICHER nÂ°
+	- 11	= attachÃ© coplanaire
+	- 12	= sÃ©parÃ© sans nÂ° affichÃ©
 	*/
   let a = lit_off(fichier());
   a.nom = 'MARY';
@@ -64,14 +64,14 @@ function main(params){
   a.V = rechercheVoisins(a);
   a.csg = poseAuSol(a.csg.scale(params.echelle));
   a.V = rechercheV_Coplanaires(a);
-  a.cag = []; // chaque triangle en 2D (calculé quand posé ou lié)
+  a.cag = []; // chaque triangle en 2D (calculÃ© quand posÃ© ou liÃ©)
   a.lTPage = []; // liste des triangles de chaque page
   a.cumul = []; // cumul (cag) des triangles de chaque page
   let nTriangles = a.V.length, r = {cag:[], pdf:[]}, nPage = 0;
   let xD;
   let prems = params.triangle.split(',').map(Number);
   _gTextScale = params.echTexte;
-  do{ // Dépliage
+  do{ // DÃ©pliage
     xD = (prems.length > 0) ? prems.shift() : 0;
     while(gLAff.indexOf(xD) > -1){// Rech. prochain triangle
       xD++;
@@ -173,7 +173,7 @@ function main(params){
 function exportePDF(pdf){
   let retour = [], t, P1, P2, petit, grand, delta;
 
-  // met à l'échelle
+  // met Ã  l'Ã©chelle
   for(let i = 0; i < pdf.length; i++){
     pdf[i].p1 = pdf[i].p1.times(gEchPDF);
     if(pdf[i].p2 !== null){
@@ -186,7 +186,7 @@ function exportePDF(pdf){
     if(pdf[i].p1.y > grand.y){ grand.y = pdf[i].p1.y;}
   }
   delta = new CSG.Vector2D(0, grand.y);
-  // tourne les points à 180°
+  // tourne les points Ã  180Â°
   for(let i = 0; i < pdf.length; i++){
     pdf[i].p1 = new CSG.Vector2D(pdf[i].p1.x, grand.y - pdf[i].p1.y)
     if(pdf[i].p2 !== null){
@@ -306,7 +306,7 @@ function centre(p){ return p[0].plus(p[1].minus(p[0]).dividedBy(2)); }
 function afficheTempsCalcul(msDebut){
   let msFin = (new Date()).getTime();
   let ds = Math.floor((msFin - msDebut)/1000);
-  console.log('#Executé en ', (ds / 60).toFixed(0), 'min.', (ds % 60));
+  console.log('#ExecutÃ© en ', (ds / 60).toFixed(0), 'min.', (ds % 60));
 }
 function supprimeSListe(liste, aSupprimer){
   return liste.filter((el) => ! aSupprimer.includes(el));
@@ -322,7 +322,7 @@ function depliePage(a, n){
   do{
     nbOK = 0;
     let tmp = gLAff.map(el => el);
-    // supprime les triangles des pages déjà calculées
+    // supprime les triangles des pages dÃ©jÃ  calculÃ©es
     for(let i = 0; i< a.lTPage.length; i++){
       tmp = supprimeSListe(tmp, a.lTPage[i]);
     }
@@ -363,7 +363,7 @@ function lieTriangle(a, n1, n2){
   let chIdx = Math.max(n1, n2) + '_' + Math.min(n1, n2);
   if(a.lKO.indexOf(chIdx) > -1){ return false; }
 
-  // recherche des indices concernés
+  // recherche des indices concernÃ©s
   let i11 = rechIndexVoisin(a, n1, n2);
   let i12 = pt2(i11);
   let i21 = a.V[n1][i11].n1;
@@ -381,7 +381,7 @@ function lieTriangle(a, n1, n2){
   pb1 = poly2.points[i21];
   pb2 = poly2.points[i22];	
 
-  // tourne poly2 autour de pb2 de façon à ce que pb1 = pa2
+  // tourne poly2 autour de pb2 de faÃ§on Ã  ce que pb1 = pa2
   let angle = calcTriangleAngleB(pb1, pb2, pa2);
   if(angle !== null){
     tmp = poly2.rotate(pb2, [0,0,1], angle);
@@ -393,12 +393,12 @@ function lieTriangle(a, n1, n2){
   }
 
   poly2 = tmp;
-  // vérifie que le triangle ne recouvre pas un triangle déjà placé
+  // vÃ©rifie que le triangle ne recouvre pas un triangle dÃ©jÃ  placÃ©
   let tNouv = poly2.innerToCAG().subtract(poly2.expandToCAG(gep_bord));
   let nC = a.cumul.length - 1;
   let ok = a.cumul[nC].intersect(tNouv).area() === 0;
   if(ok){
-    // verifie qu'ajouter le triangle ne fasse pas déborder la page
+    // verifie qu'ajouter le triangle ne fasse pas dÃ©border la page
     let tmpCumul = a.cumul[nC].union(poly2.expandToCAG(gep_bord));
     let d = getTaille(tmpCumul);
     ok = (d.x <= gTaillePage.x) && (d.y <= gTaillePage.y);
@@ -476,7 +476,7 @@ function afficheTriangle(a, n){
   let p1, p2;
   /* PDF
    * 
-   * line/dash  : L/D, p1, p2   Affiche Ligne/pointillés entre p1 et p2
+   * line/dash  : L/D, p1, p2   Affiche Ligne/pointillÃ©s entre p1 et p2
    * text       : T/t, p, txt   Affiche Texte au point P (type T ou t)
    * page       : P             Ajoute une page
    */
@@ -494,16 +494,16 @@ function afficheTriangle(a, n){
     }
   }
 
-  // n° Triangle
+  // nÂ° Triangle
   p1 = centroid(poly);
   lcag.push(color("green", nombreCentre(p1, n, false)));
   lpdf.push(pushPDF('T', p1, null, n));
 
   let tmp = poly.scale(gPCNumVoisin);
   tmp = tmp.translate(p1.minus(centroid(tmp)));
-  // n° voisins
+  // nÂ° voisins
   for(let i = 0; i < a.V[n].length; i++){
-    if(a.T[n][i] < 10){ // Si le voisin est d'un type à afficher
+    if(a.T[n][i] < 10){ // Si le voisin est d'un type Ã  afficher
       let c = centroid({points:[tmp.points[i], tmp.points[pt2(i)]]});
       let nV = a.V[n][i].T;
       lcag.push(color("black", nombreCentre(c, nV, true)));
