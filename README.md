@@ -14,3 +14,8 @@ To change the 3d model :
 - if the numbers are not correctly scaled, change ff variable (scale factor for text) into pdf.js
 
 I still need to indicate folds kind (valley of mountain).
+
+It requires :
+- nodejs (https://nodejs.org/en/)
+- OpenJSCAD CLI (npm install -g @jscad/openjscad)
+- pdfkit (npm install pdfkit)
