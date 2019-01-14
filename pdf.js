@@ -17,10 +17,11 @@ imax = d.length;
 mx = 20; my = 20;
 //mx = 0; my = 0;
 mode = 'prod';
+ff = 0.75;
 
 // Cree le document
 var doc = new PDFDocument({size:taille, layout:sens, margin: 0});
-ws = fs.createWriteStream('p' +page.toString().padStart(2,'0') +'.pdf');
+ws = fs.createWriteStream('gabarit_Mary.pdf');
 doc.pipe(ws);
 
 for(i=0; i<imax; i++){
@@ -58,7 +59,7 @@ switch(ct[0]){
     case 'textT': // n° de triangle
     case 'textt': // idem grisé
       c = 'green';
-      doc.fontSize(15).fillColor(c);
+      doc.fontSize(15*ff).fillColor(c);
       x = x - doc.widthOfString(txt)/2;
       y = y - doc.heightOfString(txt)/2;
       doc.text(txt, x, y);
@@ -66,8 +67,8 @@ switch(ct[0]){
 
     case 'textE': // n° d'encoche
       c = 'black';
-      doc.fillColor(c).fontSize(12);
-      x = x - doc.widthOfString(txt)/2;			
+      doc.fillColor(c).fontSize(12*ff);
+      x = x - doc.widthOfString(txt)/2;	
       doc.text(txt, x, y);
       break;
       
