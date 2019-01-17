@@ -106,7 +106,7 @@ function trie(t1, t2){
 }
 
 function sensPli(p1, p2){
-  // From Ami Fishman
+  // From Ami Fischman
   // triangle p1: (a, b, c) - triangle p2: (b, c, d)
   // trouver d (pt non partagé de p2)
   // dist(d, v) < dist(d, v.plus(w)) indicates a "mountain" while
