@@ -1,4 +1,5 @@
 # auto_flattener
+Voir dans une autre langue : [english] https://github.com/gilboonet/auto_flattener/blob/master/README.md [french] https://github.com/gilboonet/auto_flattener/blob/master/README.fr.md
 Déplie automatiquement un modèle 3d en gabarit 2d (pour découpe laser et assemblage manuel).
 
 Le code source le plus récent est dans le répertoire el1000, avec le modèle exemple d'un éléphant en 1000 triangles.
