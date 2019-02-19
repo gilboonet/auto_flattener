@@ -1,5 +1,5 @@
 # auto_flattener
-Voir dans une autre langue : [english](https://github.com/gilboonet/auto_flattener/blob/master/README.md) [french](https://github.com/gilboonet/auto_flattener/blob/master/README.fr.md)
+Voir dans une autre langue : [english](https://github.com/gilboonet/auto_flattener/blob/master/README.md) [français](https://github.com/gilboonet/auto_flattener/blob/master/README.fr.md)
 
 Déplie automatiquement un modèle 3d en gabarit 2d (pour découpe laser et assemblage manuel).
 
