@@ -1,4 +1,6 @@
 # auto_flattener
+View in another language : [english](https://github.com/gilboonet/auto_flattener/blob/master/README.md) [français](https://github.com/gilboonet/auto_flattener/blob/master/README.fr.md)
+
 Automatically unflatten a 3d model to a 2d pattern (for laser cut and manual assembly).
 
 Most recent source is into el1000 directory, with the example model of a 1000 triangles elephant.
