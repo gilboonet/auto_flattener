@@ -3,30 +3,25 @@ View in another language : [english](https://github.com/gilboonet/auto_flattener
 
 Automatically unflatten a 3d model to a 2d pattern (for laser cut and manual assembly).
 
-Most recent source is into el1000 directory, with the example model of a 1000 triangles elephant.
+Most recent source is into chat234 directory, with the example model of a 234 triangles cat.
 
-It needs a 3d model saved as .off file. To do so I use Meshlab, it can be used interactively or on the CLI with this command :
+It needs a 3d model saved as .stl file. When the file is on another format, I convert it with Meshlab, it can be used interactively or on the CLI with this command :
 ```
-meshlabserver -i file.stl -o file.off (.stl can be replaced by any 3d model format handled by meshlab).
+meshlabserver -i file.obj -o file.stl (replace file.obj by the name of the model file).
 ```
-The .off file needs to be wrapped into a jscad script, with this command that will create modele_off.jscad :
+The .stl file needs to be wrapped into a jscad script, with this command that will create modele_stl.jscad :
 ```
-node creeModele file (this will use file.off)
+node stl2jscad file (this will use file.stl)
 ```
 
-Then you can run echelle.jscad to choose the scale of the pattern.
-Those three files must be drag to an internet browser accessing Openjscad.org :
-- echelle.jscad
-- modele_off.jscad
-- utils.jscad
-
+It the model needs to be rescaled (I use Meshlab for that), just remember to save it to .stl ascii and without colors.
 
 The model is then unflatten with :
 ```
-openjscad deplie.jscad --echelle 10 --format 'a4' --triangle '10,50,100' > rendu.dat
+openjscad depliev3.jscad > rendu.dat
 ```
-- --echelle 10 will unflatten the model with a scale x 10
-- --format 'a4' will pack the pattern into a4 pages (possibles values are a1 to a4)
+Optional parameters are : (default format is a4)
+- --format 'a3' will pack the pattern into a3 pages (possibles values are a1 to a4)
 - --triangle '...' is optional and will force each page (before sorting by size) to start with provided triangle
 
 
@@ -38,7 +33,7 @@ node pdf file.pdf a4 1
 - a4 will be the page format
 - 1 will be the scale of numbers (useful when the default is too small/big)
 
-The folds kind (valley or mountain) will be shown on different color, but beware this information is not always accurate.
+The folds kind (valley or mountain) will be shown on different color, maroon for mountain and green for valley.
 
 It requires :
 - nodejs (https://nodejs.org/en/)
