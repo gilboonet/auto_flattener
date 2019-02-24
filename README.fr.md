@@ -3,42 +3,36 @@ Voir dans une autre langue : [english](https://github.com/gilboonet/auto_flatten
 
 Déplie automatiquement un modèle 3d en gabarit 2d (pour découpe laser et assemblage manuel).
 
-Le code source le plus récent est dans le répertoire el1000, avec le modèle exemple d'un éléphant en 1000 triangles.
+Le code source le plus récent est dans le répertoire chat234, avec le modèle exemple d'un chat en 234 triangles.
 
-Le script a besoin d'un modèle 3d sauvé au format .off. Pour cela, j'utilise Meshlab, soit interactivement, soit en ligne de commande avec la commande suivante :
+Le script a besoin d'un modèle 3d sauvé au format .stl ascii. S'il faut convertir le fichier, j'utilise Meshlab, soit interactivement, soit en ligne de commande avec la commande suivante :
 ```
-meshlabserver -i file.stl -o file.off (.stl can be replaced by any 3d model format handled by meshlab).
+meshlabserver -i fichier.obj -o fichier.stl (fichier.obj à remplacer par le nom du fichier).
 ```
-Le fichier .off doit être intégré à un script jscad, avec cette commande qui crée le fichier modele_off.jscad :
+Le fichier .stl doit être intégré à un script jscad, avec cette commande qui crée le fichier modele_stl.jscad :
 ```
-node creeModele file (this will use file.off)
+node stl2jscad fichier (utilisera fichier.stl)
 ```
 
-L'on peut alors lancer echelle.jscad afin de déterminer le facteur d'échelle à donner au gabarit.
-Ces trois fichiers doivent être glissés-déposés dans un navigateur ouvert sur https://openjscad.org :
-- echelle.jscad
-- modele_off.jscad
-- utils.jscad
+J'utilise Meshlab interactivement pour changer l'échelle du modèle si nécessaire. Pour voir les dimensions du modèle il faut activer 'Bounding Box', puis dans les options de visualisation à droite (une fois le modèle chargé), mettre 'Measure info' à 'On', et enfin dans le menu Renders, cocher 'Show Box Corners'. On obtient ainsi les mesures en mm. Pour modifier les dimensions du modèle, il faut utiliser dans le menu Filters, Normals... / Transform : Scale, Normalize. Puis, bien entendu, sauver le modèle redimensionné dans un fichier au format .stl (décocher binary encoding  et materialize colors). Il faut ensuite relancer la commande stl2jscad avec ce fichier.
 
-
-Le modèle est alors déplié avec :
+Le modèle peut alors être déplié avec :
 ```
-openjscad deplie.jscad --echelle 10 --format 'a4' --triangle '10,50,100' > rendu.dat
+openjscad depliev3.jscad > rendu.dat
 ```
-- --echelle 10 dépliera le modèle avec un facteur d'échelle x10
-- --format 'a4' organisera le gabarit sur des pages au format a4 (les formats possibles vont de a1 à a4)
+Les paramètres optionnels suivants peuvent être utilisé si besoin (le format par défaut est A4).
+- --format 'a3' organisera le gabarit sur des pages au format a3 (les formats possibles vont de a1 à a4)
 - --triangle '...' est optionnel et forcera chaque page (avant le tri par taille) à commencer par le triangle indiqué
-
 
 Enfin, le fichier pdf contenant le gabarit est créé par :
 ```
-node pdf file.pdf a4 1
+node pdf fichier.pdf a4 1
 ```
-- file.pdf sera le nom du gabarit
+- fichier.pdf sera le nom du gabarit
 - a4 sera le format de page utilisé
 - 1 sera le facteur d'échelle utilisé pour les nombres (utile si la valeur par défaut ne convient pas)
 
-Le sens des plis (vallée ou montagne) sera indiqué par des couleurs distinctes, mais attention, cette information n'est pas toujours correcte.
+Le sens des plis (vallée ou montagne) sera indiqué par des couleurs distinctes, marron pour montagne et vert pour vallée.
 
 
 Pré-requis :
