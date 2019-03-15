@@ -77,10 +77,10 @@ while(l < lFin){
 let sortie = [];
 sortie.push('volume = function () {');
 sortie.push('let faces =' + JSON.stringify(faces) +',');
-sortie.push('pts = ' + JSON.stringify(pts) + ',');
-sortie.push('fCsg = faces.map(m => CSG.Polygon.createFromPoints(m.map(n => pts[n]))),');
-sortie.push('csg = CSG.fromPolygons(fCsg);');
-sortie.push('return {lPts:faces, lVtx:pts, csg:csg, fCsg:fCsg};');
+sortie.push('vertices = ' + JSON.stringify(pts) + ',');
+sortie.push('faceCsg = faces.map(m => CSG.Polygon.createFromPoints(m.map(n => vertices[n]))),');
+sortie.push('csg = CSG.fromPolygons(faceCsg);');
+sortie.push('return {faces:faces, vertices:vertices, faceCsg:faceCsg, csg:csg};');
 sortie.push('};');
 
 try {
