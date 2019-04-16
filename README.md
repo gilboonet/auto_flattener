@@ -3,12 +3,9 @@ View in another language : [english](https://github.com/gilboonet/auto_flattener
 
 Automatically unflatten a 3d model to a 2d pattern (for laser cut and manual assembly).
 
-Most recent source is into dodeca directory, with the example model of a 148 triangles geometrical model.
+Most recent source is into Puzzlz_Moai directory, with the example model of a 156 triangles geometrical model.
 
-It needs a 3d model saved as .stl file. When the file is on another format, I convert it with Meshlab, it can be used interactively or on the CLI with this command :
-```
-meshlabserver -i file.obj -o file.stl (replace file.obj by the name of the model file).
-```
+It needs a 3d model saved as .stl file. When the file is on another format, I convert it with Meshlab.
 The .stl file needs to be wrapped into a jscad script, with this command that will create modele_stl.jscad :
 ```
 node stl2jscad file (this will use file.stl)
@@ -26,6 +23,8 @@ Optional parameters are : (default format is a4)
 - --triangle '...' is optional and will force each page (before sorting by size) to start with provided triangle
 - --echelle 0.75 will scale the model ( < 1 to reduce, > 1 to expand)
 
+From v5, the generated pattern can be customized by excluding facets couples, by editing file deplie.jscad, and change a.npl array. If this script is used to unflatten a new model, this array must be cleared, then filled as needed.
+
 Finally, the pattern pdf file is created with :
 ```
 node pdf file.pdf a4 1
@@ -35,6 +34,8 @@ node pdf file.pdf a4 1
 - 1 will be the scale of numbers (useful when the default is too small/big)
 
 The folds kind (valley or mountain) will be shown on different color, maroon for mountain and green for valley.
+
+From v5, it is possible to create a pattern with puzzle like notches. To do so, pdf.js must be replace by pdfP.js (run command node pdfP file.pdf...). Notches can be customized by editing file rendu.dat.
 
 It requires :
 - nodejs (https://nodejs.org/en/)
