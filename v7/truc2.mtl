@@ -1,0 +1,28 @@
+# Exported from Wings 3D 2.1.5
+newmtl couleur_000_102_203
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.0 0.4 0.796078
+Ka 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl couleur_163_254_102
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.63922 0.996078 0.4
+Ka 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl couleur_256_256_001
+Ns 90.0
+d 1.0
+illum 2
+Kd 1.0 1.0 0.00392157
+Ka 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
